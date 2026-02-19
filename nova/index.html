@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NOVA
+</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#f5f5f7;
+  --glass:rgba(255,255,255,.65);
+  --glass-border:rgba(255,255,255,.35);
+  --text:#1d1d1f;
+  --muted:#6e6e73;
+}
+
+*{
+  box-sizing:border-box;
+  font-family:Inter,sans-serif;
+}
+
+/* PAGE OPENING */
+body{
+  margin:0;
+  background:
+    radial-gradient(800px 400px at 10% -10%,#ffffff,#f5f5f7);
+  color:var(--text);
+  opacity:0;
+  transform:translateY(8px);
+  animation:pageEnter .45s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes pageEnter{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* LAYOUT */
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:48px 20px;
+}
+
+/* HEADER */
+h1{
+  font-size:40px;
+  font-weight:600;
+  margin-bottom:6px;
+  opacity:0;
+  animation:fadeUp .4s .1s forwards;
+}
+.subtitle{
+  color:var(--muted);
+  max-width:720px;
+  font-size:16px;
+  opacity:0;
+  animation:fadeUp .4s .18s forwards;
+}
+
+/* CONTROLS */
+.controls{
+  margin-top:28px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  opacity:0;
+  animation:fadeUp .4s .26s forwards;
+}
+
+input,select{
+  padding:12px 14px;
+  border-radius:14px;
+  border:1px solid var(--glass-border);
+  background:var(--glass);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  font-size:15px;
+  color:var(--text);
+  box-shadow:0 8px 20px rgba(0,0,0,.06);
+}
+
+/* GRID */
+.grid{
+  margin-top:40px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:20px;
+}
+
+/* CARD */
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border:1px solid var(--glass-border);
+  border-radius:20px;
+  padding:22px;
+  cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+  opacity:0;
+  transform:translateY(16px);
+  animation:cardEnter .45s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+/* STAGGER */
+.card:nth-child(1){animation-delay:.35s}
+.card:nth-child(2){animation-delay:.4s}
+.card:nth-child(3){animation-delay:.45s}
+.card:nth-child(4){animation-delay:.5s}
+.card:nth-child(5){animation-delay:.55s}
+.card:nth-child(6){animation-delay:.6s}
+.card:nth-child(7){animation-delay:.65s}
+.card:nth-child(8){animation-delay:.7s}
+
+/* HOVER */
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 40px rgba(0,0,0,.12);
+  background:rgba(255,255,255,.75);
+}
+
+.icon{font-size:28px}
+
+.card h3{
+  margin:0;
+  font-size:18px;
+  font-weight:500;
+}
+.card p{
+  margin:0;
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* FOOTER */
+footer{
+  margin-top:70px;
+  text-align:center;
+  font-size:13px;
+  color:#8e8e93;
+  opacity:0;
+  animation:fadeUp .4s .8s forwards;
+}
+
+/* KEYFRAMES */
+@keyframes fadeUp{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes cardEnter{
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* REDUCED MOTION SUPPORT */
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation:none !important;
+    transition:none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>NOVA</h1>
+  <p class="subtitle">
+    A clean, category-based directory of free tools, learning platforms,
+    software, and online resources. All links are external none of these links are of malhar hub.
+  </p>
+
+  <div class="controls">
+    <input id="search" placeholder="Search categories">
+    <select id="filter">
+      <option value="all">All categories</option>
+      <option value="tools">Tools</option>
+      <option value="study">Study</option>
+      <option value="media">Media</option>
+      <option value="software">Software</option>
+      <option value="ai">AI</option>
+      <option value="dev">Developer</option>
+      <option value="design">Design</option>
+      <option value="privacy">Privacy</option>
+    </select>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <div class="card" data-cat="tools" onclick="go('tools.html')">
+      <div class="icon">🛠</div>
+      <h3>Tools</h3>
+      <p>Online utilities, converters, and productivity tools.</p>
+    </div>
+
+    <div class="card" data-cat="study" onclick="go('study.html')">
+      <div class="icon">📚</div>
+      <h3>Study</h3>
+      <p>Courses, textbooks, notes, and learning platforms.</p>
+    </div>
+
+    <div class="card" data-cat="media" onclick="go('media.html')">
+      <div class="icon">🎬</div>
+      <h3>Media</h3>
+      <p>Movies TV Shows and  animes.</p>
+    </div>
+
+    <div class="card" data-cat="software" onclick="go('software.html')">
+      <div class="icon">💻</div>
+      <h3>Software</h3>
+      <p>Free and open-source software for all platforms.</p>
+    </div>
+
+    <div class="card" data-cat="ai" onclick="go('ai.html')">
+      <div class="icon">🤖</div>
+      <h3>AI</h3>
+      <p>AI tools for chat, images, video, and productivity.</p>
+    </div>
+
+    <div class="card" data-cat="dev" onclick="go('dev.html')">
+      <div class="icon">👨‍💻</div>
+      <h3>Developer</h3>
+      <p>APIs, documentation, hosting, and dev resources.</p>
+    </div>
+
+    <div class="card" data-cat="design" onclick="go('design.html')">
+      <div class="icon">🎨</div>
+      <h3>Design</h3>
+      <p>Fonts, UI kits, icons, and inspiration.</p>
+    </div>
+
+    <div class="card" data-cat="privacy" onclick="go('privacy.html')">
+      <div class="icon">🔒</div>
+      <h3>Privacy</h3>
+      <p>Privacy-respecting and security-focused tools.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    Calm motion • System-like • Built to scale
+  </footer>
+</div>
+
+<script>
+const search=document.getElementById("search");
+const filter=document.getElementById("filter");
+const cards=document.querySelectorAll(".card");
+
+function applyFilters(){
+  const q=search.value.toLowerCase();
+  const f=filter.value;
+  cards.forEach(c=>{
+    const text=c.innerText.toLowerCase();
+    const cat=c.dataset.cat;
+    const show=text.includes(q)&&(f==="all"||cat===f);
+    c.style.display=show?"flex":"none";
+  });
+}
+
+search.oninput=applyFilters;
+filter.onchange=applyFilters;
+
+function go(page){
+  window.location.href=page;
+}
+</script>
+
+</body>
+</html>

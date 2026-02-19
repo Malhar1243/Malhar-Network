@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Malhar Hub</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,#FDE789,#9ED9C8,#119DA4);
+  background-size:300% 300%;
+  animation:bgMove 18s ease infinite;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:#073b3a;
+}
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.container{
+  max-width:1300px;
+  margin:auto;
+  padding:90px 24px 80px;
+}
+.header{
+  text-align:center;
+  margin-bottom:40px;
+}
+.header h1{
+  font-family:"Archivo Black",sans-serif;
+  font-size:58px;
+  margin:0 0 12px;
+}
+.header p{
+  font-size:16px;
+  color:#0f5f63;
+  max-width:650px;
+  margin:auto;
+}
+.search-box{
+  max-width:420px;
+  margin:30px auto 18px;
+  position:relative;
+}
+.search-box svg{
+  position:absolute;
+  top:50%;
+  left:14px;
+  width:20px;
+  height:20px;
+  stroke:#64748b;
+  transform:translateY(-50%);
+}
+.search-box input{
+  width:100%;
+  padding:14px 18px 14px 44px;
+  border-radius:14px;
+  border:none;
+  font-size:15px;
+  outline:none;
+  background:#ffffff;
+  box-shadow:0 15px 30px rgba(7,59,58,.15);
+}
+.filters{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:60px;
+  flex-wrap:wrap;
+}
+.filters button{
+  border:none;
+  padding:8px 16px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  background:#ffffff;
+  box-shadow:0 8px 18px rgba(7,59,58,.12);
+  color:#073b3a;
+}
+.filters button.active{
+  background:#119DA4;
+  color:#ffffff;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+.card{
+  background:linear-gradient(180deg,#ffffff,#f5fffc);
+  border-radius:24px;
+  padding:32px;
+  min-height:260px;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  box-shadow:0 25px 50px rgba(7,59,58,.15);
+  transition:.35s ease;
+}
+.card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 45px 75px rgba(7,59,58,.25);
+}
+.status{
+  position:absolute;
+  top:18px;
+  left:18px;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 12px;
+  font-size:12px;
+  border-radius:999px;
+  font-weight:600;
+}
+.status svg{width:10px;height:10px;fill:currentColor}
+.online{background:#dcfce7;color:#166534}
+.soon{background:#fef9c3;color:#854d0e}
+.maintenance{background:#fee2e2;color:#991b1b}
+.card::after{
+  content:"↗";
+  position:absolute;
+  top:20px;
+  right:22px;
+  font-size:18px;
+  color:#119DA4;
+}
+.title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:28px;
+}
+.title svg{width:26px;height:26px;stroke:#119DA4}
+.card h3{
+  font-family:"Archivo Black",sans-serif;
+  font-size:22px;
+  margin:0;
+}
+.card p{
+  font-size:14px;
+  color:#356f73;
+  line-height:1.6;
+  margin:16px 0 28px;
+}
+.card a{
+  margin-top:auto;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:15px 0;
+  border-radius:16px;
+  font-size:15px;
+  font-weight:600;
+  text-decoration:none;
+  background:linear-gradient(135deg,#119DA4,#3fbac2);
+  color:#ffffff;
+}
+.footer{
+  text-align:center;
+  margin-top:90px;
+  font-size:13px;
+  color:#0f5f63;
+}
+.version{
+  margin-top:6px;
+  font-size:12px;
+  opacity:.8;
+}
+
+/* PROFILE */
+.profile-wrap{
+  position:fixed;
+  top:18px;
+  right:24px;
+  z-index:999;
+}
+.profile-btn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+.profile-btn svg{
+  width:22px;
+  height:22px;
+  stroke:#119DA4;
+}
+.profile-menu{
+  position:absolute;
+  top:54px;
+  right:0;
+  width:260px;
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 25px 60px rgba(0,0,0,.2);
+  padding:16px;
+  display:none;
+}
+.profile-menu.show{display:block}
+.profile-action{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+}
+.login-btn{background:#119DA4;color:#fff;margin-bottom:8px}
+.signup-btn{background:#e6f7f6;color:#073b3a}
+</style>
+</head>
+
+<body>
+
+<div class="profile-wrap">
+  <div class="profile-btn" id="profileBtn">
+    <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round"
+        d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.25a7.5 7.5 0 0115 0"/>
+    </svg>
+  </div>
+  <div class="profile-menu" id="profileMenu">
+    <button class="profile-action login-btn" onclick="window.location.href='login.html'">Login</button>
+    <button class="profile-action signup-btn" onclick="window.location.href='register.html'">Sign Up</button>
+
+  </div>
+</div>
+
+<div class="container">
+
+<div class="header">
+  <h1>Malhar Hub</h1>
+  <p>A central place for my tools, projects, and student-focused platforms.</p>
+</div>
+
+<div class="search-box">
+  <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+    <path stroke-linecap="round" stroke-linejoin="round"
+      d="M21 21l-4.35-4.35M16.65 10.5a6.15 6.15 0 11-12.3 0 6.15 6.15 0 0112.3 0z"/>
+  </svg>
+  <input id="search" placeholder="Search tools, resources, projects...">
+</div>
+
+<div class="filters">
+  <button class="active" data-filter="all">All</button>
+  <button data-filter="online">Online</button>
+  <button data-filter="soon">Coming Soon</button>
+  <button data-filter="maintenance">Maintenance</button>
+</div>
+
+<div class="grid" id="cards">
+
+<!-- Tools Hub (ONLINE) -->
+<div class="card" data-text="tools pdf toolkit" data-status="online">
+<span class="status online"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4"/></svg> Online</span>
+<div class="title">
+<svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a4.5 4.5 0 01-6.4 6.4L3 18l3 3 5.3-5.3a4.5 4.5 0 006.4-6.4z"/></svg>
+<h3>Tools Hub</h3>
+</div>
+<p>PDF Toolkit, generators, converters, and useful daily tools.</p>
+<a href="toolshub.html">Open</a>
+</div>
+
+<!-- Project Showcase (ONLINE) -->
+<div class="card" data-text="projects showcase" data-status="online">
+<span class="status online"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4"/></svg> Online</span>
+<div class="title">
+<svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+<h3>Project Showcase</h3>
+</div>
+<p>Personal web projects, experiments, and learning builds.</p>
+<a href="projects.html">Open</a>
+</div>
+
+<!-- Audio Libraries (ONLINE) -->
+<div class="card" data-text="Copyright/Licence Free audios, Free to use and real audio players" data-status="online">
+<span class="status online"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4"/></svg> Online</span>
+<div class="title">
+<svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a4.5 4.5 0 01-6.4 6.4L3 18l3 3 5.3-5.3a4.5 4.5 0 006.4-6.4z"/></svg>
+<h3>Audio</h3>
+</div>
+<p>Copyright/Licence Free audios, Free to use and real audio players.</p>
+<a href="audiolib.html">Open</a>
+</div>
+
+<!-- Shop -->
+<div class="card" data-text="shop store products" data-status="online">
+<span class="status online"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4"/></svg> Online</span>
+<div class="title">
+<svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18l-2 12H5L3 6z"/></svg>
+<h3>Shop</h3>
+</div>
+<p>Subdomains and HTML,CSS,JS hosting available to purchase.</p>
+<a href="https://shop.malhar.site">Open</a>
+</div>
+
+<!-- NOVA -->
+<div class="card" data-text="All links" data-status="soon">
+<span class="status soon"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4"/></svg> Coming Soon</span>
+<div class="title">
+<svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M12 6v12"/></svg>
+<h3>NOVA</h3>
+</div>
+<p>Surprise , Small Progress done</p>
+<a href="nova/index.html">Open</a>
+</div>
+
+<!-- Student -->
+<div class="card" data-text="student lab manuals" data-status="maintenance">
+<span class="status maintenance"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4"/></svg> Maintenance</span>
+<div class="title">
+<svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m-4-3h8"/></svg>
+<h3>Student Resource Hub</h3>
+</div>
+<p>Lab manuals and last-year question papers for all branches.</p>
+<a href="#">Open</a>
+</div>
+
+<!-- Games -->
+<div class="card" data-text="games fun play" data-status="soon">
+<span class="status soon"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4"/></svg> Coming Soon</span>
+<div class="title">
+<svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12h12M12 6v12"/></svg>
+<h3>Games</h3>
+</div>
+<p>Simple web games for fun, learning, and experiments.</p>
+<a href="miencraft.html">Open</a>
+</div>
+
+<!-- Services -->
+<div class="card" data-text="services web development" data-status="maintenance">
+<span class="status maintenance"><svg viewBox="0 0 8 8"><circle cx="4" cy="4" r="4"/></svg> Maintenance</span>
+<div class="title">
+<svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3v2.25M14.25 3v2.25M4.5 7.5h15"/></svg>
+<h3>Services</h3>
+</div>
+<p>Web development services, hosting setup, and small custom builds.</p>
+<a href="#">Open</a>
+</div>
+
+</div>
+
+<div class="footer">
+© 2026 Malhar
+<div class="version">Malhar Hub v1.0</div>
+</div>
+
+</div>
+
+<script>
+const search=document.getElementById("search");
+const cards=document.querySelectorAll(".card");
+const filterButtons=document.querySelectorAll(".filters button");
+let activeFilter="all";
+function applyFilters(){
+  const query=search.value.toLowerCase();
+  cards.forEach(card=>{
+    const matchText=card.dataset.text.includes(query);
+    const matchStatus=activeFilter==="all"||card.dataset.status===activeFilter;
+    card.style.display=matchText&&matchStatus?"flex":"none";
+  });
+}
+search.addEventListener("input",applyFilters);
+filterButtons.forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    filterButtons.forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    activeFilter=btn.dataset.filter;
+    applyFilters();
+  });
+});
+
+const profileBtn=document.getElementById("profileBtn");
+const profileMenu=document.getElementById("profileMenu");
+profileBtn.addEventListener("click",()=>{
+  profileMenu.classList.toggle("show");
+});
+window.addEventListener("click",(e)=>{
+  if(!profileBtn.contains(e.target)&&!profileMenu.contains(e.target)){
+    profileMenu.classList.remove("show");
+  }
+});
+</script>
+
+</body>
+</html>
+

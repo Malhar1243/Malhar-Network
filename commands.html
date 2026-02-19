@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Friends SMP | Commands</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --mc-green:#3aa655;
+  --mc-border:#2e5d44;
+  --mc-text:#e6f4ea;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  color:var(--mc-text);
+  background:#0f1a14;
+}
+
+/* NAVBAR */
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:linear-gradient(180deg,#1b3a2b,#0f1a14);
+  border-bottom:3px solid var(--mc-border);
+}
+
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  justify-content:center;
+  gap:28px;
+}
+
+.nav-inner a{
+  font-family:"Archivo Black",sans-serif;
+  color:var(--mc-text);
+  text-decoration:none;
+  font-size:14px;
+  padding:8px 18px;
+  background:#1f3a2b;
+  border:2px solid #1f3a2b;
+}
+
+.nav-inner a:hover{
+  background:#2e5d44;
+  border-color:var(--mc-green);
+  color:#7CFF9B;
+}
+
+/* SECTION */
+.section{
+  max-width:1100px;
+  margin:auto;
+  padding:60px 20px;
+}
+
+.section-title{
+  font-family:"Archivo Black",sans-serif;
+  font-size:32px;
+  margin-bottom:20px;
+}
+
+/* SEARCH */
+.search{
+  width:100%;
+  padding:14px;
+  border-radius:8px;
+  border:2px solid var(--mc-border);
+  background:#0f1a14;
+  color:var(--mc-text);
+  font-size:14px;
+  margin-bottom:30px;
+}
+
+/* CARD */
+.card{
+  background:linear-gradient(180deg,#1f3a2b,#182c21);
+  border:2px solid var(--mc-border);
+  border-radius:8px;
+  padding:18px;
+  margin-bottom:40px;
+}
+
+/* CATEGORY */
+.category-title{
+  font-family:"Archivo Black",sans-serif;
+  font-size:22px;
+  margin-bottom:16px;
+}
+
+/* COMMAND ROW */
+.command-row{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:16px;
+  background:#0f1a14;
+  border-left:4px solid var(--mc-green);
+  padding:12px 14px;
+  margin-bottom:10px;
+}
+
+.command-left{
+  font-family:monospace;
+  font-size:14px;
+  color:#fff;
+}
+
+.command-right{
+  font-size:13px;
+  opacity:.85;
+}
+
+/* MOBILE */
+@media(max-width:700px){
+  .command-row{grid-template-columns:1fr}
+}
+
+/* FOOTER */
+.footer{
+  background:linear-gradient(180deg,#2a1414,#120000);
+  padding:40px 20px;
+  text-align:center;
+  font-size:13px;
+  opacity:.85;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="nav-inner">
+    <a href="miencraft.html">Home</a>
+    <a href="laws.html">Laws & Punishment</a>
+    <a href="commands.html">Commands</a>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">Commands</div>
+
+  <input class="search" placeholder="Search commands..."
+    onkeyup="searchCommands(this.value)">
+
+  <!-- ESSENTIALS -->
+  <div class="card">
+    <div class="category-title">Essentials</div>
+
+    <div class="command-row">
+      <div class="command-left">/spawn</div>
+      <div class="command-right">Teleport to server spawn.</div>
+    </div>
+
+    <div class="command-row">
+      <div class="command-left">/home</div>
+      <div class="command-right">Teleport to your home.</div>
+    </div>
+
+    <div class="command-row">
+      <div class="command-left">/sethome</div>
+      <div class="command-right">Set your home location.</div>
+    </div>
+
+    <div class="command-row">
+      <div class="command-left">/tpa &lt;player&gt;</div>
+      <div class="command-right">Request teleport to another player.</div>
+    </div>
+
+    <div class="command-row">
+      <div class="command-left">/msg &lt;player&gt;</div>
+      <div class="command-right">Send a private message.</div>
+    </div>
+
+    <div class="command-row">
+      <div class="command-left">/afk</div>
+      <div class="command-right">Toggle AFK status.</div>
+    </div>
+  </div>
+
+  <!-- ECONOMY -->
+  <div class="card">
+    <div class="category-title">Economy & Shop</div>
+
+    <div class="command-row">
+      <div class="command-left">/balance</div>
+      <div class="command-right">Check your money balance.</div>
+    </div>
+
+    <div class="command-row">
+      <div class="command-left">/bal top</div>
+      <div class="command-right">View the richest players on the server.</div>
+    </div>
+
+    <div class="command-row">
+      <div class="command-left">/pay &lt;player&gt; &lt;amount&gt;</div>
+      <div class="command-right">Send money to another player.</div>
+    </div>
+
+    <div class="command-row">
+      <div class="command-left">/shop</div>
+      <div class="command-right">Open the server shop.</div>
+    </div>
+  </div>
+
+  <!-- GSIT -->
+  <div class="card">
+    <div class="category-title">GSit</div>
+
+    <div class="command-row">
+      <div class="command-left">/sit</div>
+      <div class="command-right">Sit anywhere.</div>
+    </div>
+
+    <div class="command-row">
+      <div class="command-left">/lay</div>
+      <div class="command-right">Lay down on the ground.</div>
+    </div>
+
+    <div class="command-row">
+      <div class="command-left">/bellyflop</div>
+      <div class="command-right">Lay flat on your stomach.</div>
+    </div>
+
+    <div class="command-row">
+      <div class="command-left">/spin</div>
+      <div class="command-right">Spin while sitting or laying.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Friends SMP • Commands
+</div>
+
+<script>
+function searchCommands(q){
+  q=q.toLowerCase();
+  document.querySelectorAll(".command-row").forEach(r=>{
+    r.style.display =
+      r.innerText.toLowerCase().includes(q) ? "grid" : "none";
+  });
+}
+</script>
+
+</body>
+</html>

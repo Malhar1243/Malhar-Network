@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media • Streaming</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#f4f6fb;
+  --glass:rgba(255,255,255,0.55);
+  --border:rgba(255,255,255,0.35);
+  --accent:#0a84ff;
+  --text:#0f172a;
+  --muted:#64748b;
+  --radius:16px;
+  --blur:blur(14px);
+}
+
+*{
+  box-sizing:border-box;
+  font-family:Inter,system-ui,sans-serif;
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at top left,#dbeafe,transparent 45%),
+    radial-gradient(circle at bottom right,#e0f2fe,transparent 45%),
+    var(--bg);
+  color:var(--text);
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:40px 18px 80px;
+}
+
+.header h1{
+  font-size:32px;
+  margin:0 0 6px;
+}
+
+.header p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.section{
+  margin-top:38px;
+}
+
+.section-title{
+  font-size:20px;
+  font-weight:600;
+  margin-bottom:10px;
+}
+
+.section-box{
+  background:var(--glass);
+  backdrop-filter:var(--blur);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:14px 16px;
+}
+
+.media-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.media-list li{
+  padding:10px 0;
+  border-bottom:1px solid rgba(0,0,0,0.06);
+}
+
+.media-list li:last-child{
+  border-bottom:none;
+}
+
+.media-list a{
+  text-decoration:none;
+  color:var(--text);
+  font-weight:500;
+  font-size:14px;
+}
+
+.media-list a:hover{
+  color:var(--accent);
+}
+
+.tag{
+  font-size:11px;
+  padding:3px 8px;
+  border-radius:999px;
+  background:rgba(10,132,255,0.12);
+  color:var(--accent);
+  margin-left:8px;
+}
+
+.note{
+  margin-top:10px;
+  font-size:12px;
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>Media Streaming</h1>
+    <p>Curated streaming resources — simple, clean, and fast.</p>
+  </div>
+
+  <!-- Movies -->
+  <div class="section">
+    <div class="section-title">🎬 Movies Streaming</div>
+    <div class="section-box">
+      <ul class="media-list">
+        <li><a href="https://net20.cc/">Netmirror</a><span class="tag">HD</span></li>
+        <li><a href="https://www.cineby.gd/">Cineby</a><span class="tag">Fast</span></li>
+        <li><a href="https://www.fmovies.gd/">Fmovies+</a></li>
+        <li><a href="https://xprime.today/">Xprime</a><span class="tag">Sub</span></li>
+        <li><a href="https://watch.corsflix.net/">Corsflix</a></li>
+        <li><a href="https://flickystream.ru/">FlickyStream</a><span class="tag">Multi</span></li>
+        <li><a href="https://cinemora.ru/">Cinemora</a></li>
+        <li><a href="https://cinegram.net/">Cinegram</a><span class="tag">1080p</span></li>
+        <li><a href="https://watch.spencerdevs.xyz/">SpenFlix</a></li>
+        <li><a href="https://www.1shows.nl/">1Shows</a></li>
+        <li><a href="https://www.1flex.nl/">1Flex</a></li>
+        <li><a href="https://www.rgshows.ru/?p=1">RGShows</a></li>
+        <li><a href="https://cinevibe.asia/">Cinevibe</a></li>
+        <li><a href="https://filmcave.ru/">FilmCave</a></li>
+        <li><a href="https://flixway.pro/">FlixWay</a></li>
+        <li><a href="https://cinema.bz/">Cinema.bz</a></li>
+        <li><a href="https://cinetaro.buzz/">Cinetaro</a></li>
+        <li><a href="https://icefy.top/">Icefy</a></li>
+        <li><a href="https://smashystream.com/">SmashyStream</a></li>
+        <li><a href="https://www.levidia.ch/">Levidia</a></li>
+        <li><a href="https://primewire.mov/home">Primewire</a></li>
+        <li><a href="https://projectfreetv.sx/">ProjectFreeTV</a></li>
+        <li><a href="https://www.downloads-anymovies.co/">Downloads-Anymovies</a></li>  
+
+      </ul>
+      <div class="note">⚠️ Streaming quality & availability may vary.</div>
+    </div>
+  </div>
+
+  <!-- Movies-1 -->
+  <div class="section">
+    <div class="section-title">🎬 Single Server</div>
+    <div class="section-box">
+      <ul class="media-list">
+        <li><a href="https://nepu.to/">NEPU</a><span class="tag">HD</span></li>
+        <li><a href="https://cinemacity.cc/">Cinemacity</a><span class="tag">Fast</span></li>
+        <li><a href="https://www.showbox.media/">Showbox</a></li>
+        <li><a href="https://ww1.yesmovies.ag/">YesMovies</a><span class="tag">Sub</span></li>
+        <li><a href="https://www.lookmovie2.to/">LookMovie</a></li>
+        <li><a href="https://playimdb.com/">PlayIMDB</a><span class="tag">Multi</span></li> 
+      </ul>
+      <div class="note">⚠️ Streaming quality & availability may vary.</div>
+    </div>
+  </div>
+
+  <!-- Movies-2 -->
+  <div class="section">
+    <div class="section-title">🎬 Stream Aggregators</div>
+    <div class="section-box">
+      <ul class="media-list">
+        <li><a href="https://flixer.sh/">Flixer</a><span class="tag">HD</span></li>
+        <li><a href="https://www.cinezo.net/home">Cinezo</a><span class="tag">Fast</span></li>
+        <li><a href="https://yenime.net/">Yenime</a></li>
+        <li><a href="https://aether.mom/">Aether</a><span class="tag">Sub</span></li>
+        <li><a href="https://bcine.app/">Bcine</a></li>
+        <li><a href="https://vidbox.cc/">Vidbox</a><span class="tag">Multi</span></li> 
+        <li><a href="https://tv.vynx.cc/">FlyX</a><span class="tag">HD</span></li>
+        <li><a href="https://www.aurorascreen.org/">AuroraScreen</a><span class="tag">Fast</span></li>
+        <li><a href="https://primeshows.uk/">PrimeShows</a></li>
+        <li><a href="https://netflex.uk/">NetFlex</a><span class="tag">Sub</span></li>
+        <li><a href="https://lordflix.club/">LordFlix</a></li>
+        <li><a href="https://flickerminiproxy.pages.dev/">FlickerMiniProxy</a><span class="tag">Multi</span></li>
+        <li><a href="https://netplayz.live/">Netplays</a><span class="tag">Multi</span></li> 
+        <li><a href="https://cinelove.live/">CineLove</a><span class="tag">HD</span></li>
+        <li><a href="https://youflex.live/">YouFlex</a><span class="tag">Fast</span></li>
+        <li><a href="https://mappl.tv/">MappleTV</a></li>
+        <li><a href="https://www.zxcprime.icu/">ZXCprime</a><span class="tag">Sub</span></li>
+        <li><a href="https://watch-v2.autoembed.cc/">Autoembed</a></li>
+        <li><a href="https://moviebay.cc/">Moviebay</a><span class="tag">Multi</span></li>
+        <li><a href="https://www.quickwatch.co/">QuickWatch</a><span class="tag">Multi</span></li>
+        <li><a href="https://playtorrio.xyz/">PlayTorrio</a><span class="tag">Multi</span></li>
+        <li><a href="https://mov-cli.github.io/">Mov-Chi</a><span class="tag">Multi</span></li>
+      </ul>
+      <div class="note">⚠️ Streaming quality & availability may vary.</div>
+    </div>
+  </div>
+
+  <!-- Movies-3 -->
+  <div class="section">
+    <div class="section-title">🎬 Embed Frontends</div>
+    <div class="section-box">
+      <ul class="media-list">
+        <li><a href="https://voidflix.pages.dev/">VoidFlix</a><span class="tag">HD</span></li>
+        <li><a href="https://flixzy.pages.dev/">Flixzy</a><span class="tag">Fast</span></li>
+        <li><a href="https://tmovie.tv/">TMovie</a></li>
+        <li><a href="https://flixvo.live/">FlixVo</a><span class="tag">Sub</span></li>
+        <li><a href="https://www.boredflix.com/">BoredFlix</a></li>
+        <li><a href="https://sanuflix-web-v2.pages.dev/">SanuFlix</a><span class="tag">Multi</span></li> 
+        <li><a href="https://cinebolt.net/">CineBolt</a><span class="tag">Multi</span></li>
+        <li><a href="https://streamr.pages.dev/">StreamR</a><span class="tag">Multi</span></li>
+        <li><a href="https://cubeflix.org/discover">CubeFlix</a><span class="tag">Multi</span></li>
+        <li><a href="https://www.lunastream.fun/">LunaStream</a><span class="tag">Multi</span></li>
+        <li><a href="https://way2movies.live/">Way2Movies</a><span class="tag">Multi</span></li>
+        <li><a href="https://plexmovies.online/">PlexMovies</a><span class="tag">Multi</span></li>
+        <li><a href="https://streamex.net/">StreamEx</a><span class="tag">Multi</span></li>
+        <li><a href="https://snowstream.vercel.app/">SnowStream</a><span class="tag">Multi</span></li>
+      </ul>
+      <div class="note">⚠️ Streaming quality & availability may vary.</div>
+    </div>
+  </div>
+
+
+  <!-- Anime -->
+  <div class="section">
+    <div class="section-title">🍥 Anime Streaming</div>
+    <div class="section-box">
+      <ul class="media-list">
+        <li><a href="https://wotaku.wiki/websites">Wotaku</a><span class="tag">Sub/Dub</span></li>
+        <li><a href="https://theindex.moe/library/anime">TheIndex</a><span class="tag">1080p</span></li>
+        <li><a href="https://everythingmoe.com/">EverythingMoe</a></li>
+        <li><a href="https://www.miruro.com/">Miruro</a></li>
+        <li><a href="https://hianime.ro/">HiAnime</a></li>
+        <li><a href="https://www.animepahe.com/">AnimePahe</a></li>
+        <li><a href="https://www.animixplay.to/">AnimixPlay</a></li>
+        <li><a href="https://www.gogoanime.cm/">GogoAnime</a></li>
+        <li><a href="https://www.animeflv.net/">AnimeFLV</a></li>
+        <li><a href="https://www.animedao.to/">AnimeDao</a><span class="tag">Fast</span></li>
+        <li><a href="https://www.animerealms.org/en">AnimeRealms</a></li>
+        <li><a href="https://allmanga.to/">AllManga</a><span class="tag">Multi</span></li>
+        <li><a href="https://animepahe.si/">AnimePahe</a></li>
+        <li><a href="https://animex.one/">AnimeX</a></li>
+        <li><a href="https://anidap.se/">AniDap</a><span class="tag">HD</span></li>
+        <li><a href="https://kuroiru.co/">Kuroiru</a></li>
+        <li><a href="https://seanime.app/">SeAnime</a><span class="tag">Best Windows App</span></li>
+        <li><a href="https://yenime.net/">Yenime</a></li>
+        <li><a href="https://123animes.ru/">123Animes</a></li>
+        <li><a href="https://anibite.cc/">AniBite</a></li>
+        <li><a href="https://kuudere.to/">Kuudere</a></li>
+        <li><a href="https://animetsu.net/">Animetsu</a></li>
+        <li><a href="https://animeyy.com/">AnimeYY</a></li>
+        <li><a href="https://justanime.to/">JustAnime</a></li>
+        <li><a href="https://anikuro.to/">AniKuro</a></li>
+        <li><a href="https://animenosub.to/">AnimeNoSub</a></li>
+        <li><a href="https://anime.nexus/">AnimeNexus</a></li>
+        <li><a href="https://animehub.ac/">AnimeHub</a></li>
+        <li><a href="https://anizone.to/">AniZone</a></li>
+        <li><a href="https://anihq.org/">AniHQ</a></li>
+        <li><a href="https://animelok.site/">AnimeLok</a></li>
+        <li><a href="https://lunaranime.ru/">LunarAnime</a></li>
+        <li><a href="https://anoboye.com/">AnoBoy</a></li>
+        <li><a href="https://senshi.live/">Senshi</a></li>
+        <li><a href="https://www.animeparadise.moe/">AnimeParadise</a></li>
+        <li><a href="https://www.animeonsen.xyz/">AnimeOnsen</a></li>
+        <li><a href="https://fireani.me/">FireAni</a></li>
+        <li><a href="https://animedekho.in/home">AnimeDekho</a></li>
+        <li><a href="https://animexin.dev/">AnimeXin</a></li>
+        <li><a href="https://luciferdonghua.in/">LuciferDonghua</a></li>
+        <li><a href="https://lmanime.com/">LMAnime</a></li>
+        <li><a href="https://cksub.org/">CKSub</a></li>
+        <li><a href="https://myanime.live/">MyAnime</a></li>
+        <li><a href="https://animekhor.org/">AnimeKhor</a></li>
+        <li><a href="https://crimsonfansubs.com/">CrimsonFansubs</a></li>
+        <li><a href="https://kara.moe/">Kara</a></li>
+        <li><a href="https://animethemes.moe/">AnimeThemes</a></li>
+        <li><a href=""> </a></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

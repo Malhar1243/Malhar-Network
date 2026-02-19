@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Open Music</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root{
+  --bg:#0b0b0f;
+  --card:#15151d;
+  --accent:#1db954;
+  --text:#ffffff;
+  --muted:#9ca3af;
+}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Inter,system-ui;
+}
+body{
+  background:var(--bg);
+  color:var(--text);
+  padding-bottom:clamp(140px,18vw,180px);
+}
+header{
+  padding:clamp(16px,4vw,24px);
+  text-align:center;
+}
+header h1{
+  font-size:clamp(22px,5vw,28px);
+  margin-bottom:12px;
+}
+.top-bar{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.search-box input,
+.filter-select{
+  padding:12px 14px;
+  border-radius:14px;
+  border:none;
+  background:var(--card);
+  color:white;
+  font-size:clamp(14px,3.5vw,15px);
+  outline:none;
+  min-width:240px;
+}
+.categories{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.categories button{
+  background:var(--card);
+  color:white;
+  border:none;
+  padding:8px 14px;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:12px;
+}
+.categories button:hover{
+  background:var(--accent);
+  color:black;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:clamp(14px,3vw,20px);
+  padding:clamp(16px,4vw,24px);
+}
+.card{
+  background:var(--card);
+  border-radius:14px;
+  padding:14px;
+  cursor:pointer;
+  transition:.2s;
+}
+.card:hover{transform:scale(1.04)}
+.card img{
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:10px;
+  object-fit:cover;
+}
+.card h3{
+  font-size:clamp(13px,3.5vw,14px);
+  margin-top:10px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.card p{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* PLAYER */
+.player{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  background:#0f0f16;
+  border-top:1px solid #222;
+  padding:12px 16px;
+  display:none;
+  flex-direction:column;
+  gap:8px;
+}
+.progress input{width:100%}
+.player-main{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.cover{
+  width:clamp(48px,14vw,64px);
+  height:clamp(48px,14vw,64px);
+  border-radius:12px;
+  object-fit:cover;
+  animation:spin 12s linear infinite;
+  animation-play-state:paused;
+}
+.playing .cover{animation-play-state:running}
+@keyframes spin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+.info{
+  flex:1;
+  min-width:160px;
+}
+.info h4{
+  font-size:clamp(13px,3.5vw,14px);
+}
+.info p{
+  font-size:12px;
+  color:var(--muted);
+}
+.controls{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.controls button{
+  background:var(--card);
+  border:none;
+  color:white;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:13px;
+}
+.controls button:hover{
+  background:var(--accent);
+  color:black;
+}
+.volume{
+  width:80px;
+}
+@media (max-width:600px){
+  .player-main{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .controls{
+    width:100%;
+    justify-content:space-between;
+  }
+  .volume{
+    width:100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🎧 Open Music</h1>
+
+  <div class="top-bar">
+    <div class="search-box">
+      <input id="search" placeholder="Search songs or artists…">
+    </div>
+
+    <select class="filter-select" id="filter" onchange="applyFilter()">
+      <option value="">All Genres</option>
+      <option value="rock">Rock</option>
+      <option value="pop">Pop</option>
+      <option value="electronic">EDM</option>
+      <option value="hiphop">Hip-Hop</option>
+      <option value="jazz">Jazz</option>
+      <option value="classical">Classical</option>
+      <option value="ambient">Ambient</option>
+      <option value="acoustic">Acoustic</option>
+      <option value="instrumental">Instrumental</option>
+      <option value="metal">Metal</option>
+      <option value="reggae">Reggae</option>
+      <option value="blues">Blues</option>
+      <option value="folk">Folk</option>
+      <option value="lofi">Lo-Fi</option>
+      <option value="chill">Chill</option>
+    </select>
+  </div>
+
+  <div class="categories">
+    <button onclick="loadCategory('lofi')">Lo-Fi</button>
+    <button onclick="loadCategory('chill')">Chill</button>
+    <button onclick="loadCategory('rock')">Rock</button>
+    <button onclick="loadCategory('electronic')">EDM</button>
+    <button onclick="loadCategory('acoustic')">Acoustic</button>
+    <button onclick="loadCategory('jazz')">Jazz</button>
+  </div>
+</header>
+
+<div class="grid" id="results"></div>
+
+<div class="player" id="player">
+  <div class="progress">
+    <input type="range" id="seek" value="0">
+  </div>
+
+  <div class="player-main">
+    <img class="cover" id="cover">
+    <div class="info">
+      <h4 id="title"></h4>
+      <p id="artist"></p>
+    </div>
+    <div class="controls">
+      <button onclick="prev()">⏮</button>
+      <button onclick="togglePlay()">▶️ / ⏸</button>
+      <button onclick="next()">⏭</button>
+      <button onclick="downloadCurrent()">⬇ Download</button>
+    </div>
+    <input class="volume" type="range" min="0" max="1" step="0.01"
+      onchange="audio.volume=this.value">
+  </div>
+</div>
+
+<audio id="audio"></audio>
+
+<script>
+const CLIENT_ID="c5d10c67";
+
+const searchInput=document.getElementById("search");
+const filterSelect=document.getElementById("filter");
+const results=document.getElementById("results");
+const player=document.getElementById("player");
+const audio=document.getElementById("audio");
+const cover=document.getElementById("cover");
+const title=document.getElementById("title");
+const artist=document.getElementById("artist");
+const seek=document.getElementById("seek");
+
+let queue=[],current=0,debounce;
+
+loadRecommended();
+
+searchInput.addEventListener("input",()=>{
+  clearTimeout(debounce);
+  debounce=setTimeout(searchMusic,400);
+});
+
+function applyFilter(){
+  filterSelect.value ? loadCategory(filterSelect.value) : loadRecommended();
+}
+
+function loadRecommended(){
+  fetchTracks("order=popularity_total");
+}
+
+function loadCategory(tag){
+  searchInput.value="";
+  filterSelect.value=tag;
+  fetchTracks(`tags=${tag}`);
+}
+
+function searchMusic(){
+  const q=searchInput.value.trim();
+  if(!q){loadRecommended();return;}
+  fetchTracks(`search=${encodeURIComponent(q)}`);
+}
+
+async function fetchTracks(extra){
+  const res=await fetch(
+    `https://api.jamendo.com/v3.0/tracks/?client_id=${CLIENT_ID}&format=json&limit=200&${extra}`
+  );
+  const data=await res.json();
+
+  queue=data.results;
+  results.innerHTML="";
+
+  queue.forEach((t,i)=>{
+    const c=document.createElement("div");
+    c.className="card";
+    c.innerHTML=`<img src="${t.image}">
+                 <h3>${t.name}</h3>
+                 <p>${t.artist_name}</p>`;
+    c.onclick=()=>playIndex(i);
+    results.appendChild(c);
+  });
+}
+
+function playIndex(i){
+  current=i;
+  const t=queue[i];
+  cover.src=t.image;
+  title.textContent=t.name;
+  artist.textContent=t.artist_name;
+  audio.src=t.audio;
+  audio.play();
+  player.style.display="flex";
+  player.classList.add("playing");
+}
+function togglePlay(){
+  audio.paused
+    ? (audio.play(),player.classList.add("playing"))
+    : (audio.pause(),player.classList.remove("playing"));
+}
+function next(){if(current<queue.length-1)playIndex(current+1)}
+function prev(){if(current>0)playIndex(current-1)}
+
+audio.addEventListener("timeupdate",()=>{
+  seek.value=(audio.currentTime/audio.duration)*100||0;
+});
+seek.addEventListener("input",()=>{
+  audio.currentTime=(seek.value/100)*audio.duration;
+});
+audio.addEventListener("ended",next);
+
+function downloadCurrent(){
+  const t=queue[current];
+  if(!t) return;
+  const a=document.createElement("a");
+  a.href=t.audio;
+  a.download=`${t.artist_name} - ${t.name}.mp3`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+</script>
+
+</body>
+</html>

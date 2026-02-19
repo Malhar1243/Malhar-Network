@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Malhar Music</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ================= BASE ================= */
+:root{
+  --bg:#0a0b10;
+  --card:#15151d;
+  --muted:#aaa;
+  --accent:#ff4d8d;
+}
+
+body{
+  margin:0;
+  font-family:system-ui, Arial;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, #ff7ab633, transparent 40%),
+    radial-gradient(900px 500px at 90% 10%, #7c8cff33, transparent 45%),
+    linear-gradient(180deg,#0a0b10,#05060a);
+  color:white;
+  padding:20px;
+  padding-bottom:190px;
+}
+
+h2{margin:0 0 6px;font-weight:700}
+h3{margin:30px 0 10px}
+
+input{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  font-size:16px;
+  margin:20px 0;
+  background:rgba(255,255,255,.08);
+  color:white;
+  backdrop-filter:blur(10px);
+}
+
+/* ================= GRID ================= */
+#results{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:14px;
+}
+
+/* ================= CARD ================= */
+.card{
+  background:linear-gradient(
+    135deg,
+    rgba(255,255,255,.18),
+    rgba(255,255,255,.05)
+  );
+  backdrop-filter:blur(14px);
+  border-radius:22px;
+  padding:12px;
+  cursor:pointer;
+  position:relative;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.2);
+}
+
+.card.playing{
+  box-shadow:
+    0 0 0 2px var(--accent),
+    0 20px 40px rgba(0,0,0,.45);
+}
+
+.card img{
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:18px;
+  object-fit:cover;
+}
+
+.card h4{
+  margin:10px 0 2px;
+  font-size:14px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.card p{
+  margin:0;
+  font-size:12px;
+  color:var(--muted);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.menu{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(0,0,0,.45);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  cursor:pointer;
+}
+
+/* ================= MENU ================= */
+.menu-box{
+  position:fixed;
+  background:#111;
+  border:1px solid #222;
+  border-radius:12px;
+  padding:6px;
+  z-index:999;
+}
+.menu-box div{
+  padding:6px 10px;
+  font-size:13px;
+  cursor:pointer;
+}
+.menu-box div:hover{background:#222}
+
+/* ================= QUEUE ================= */
+#queue{
+  position:fixed;
+  right:10px;
+  bottom:200px;
+  width:260px;
+  max-height:300px;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.18),
+      rgba(255,255,255,.06)
+    );
+  backdrop-filter:blur(16px);
+  border-radius:22px;
+  padding:10px;
+  overflow:auto;
+  display:none;
+}
+#queue h4{margin:0 0 8px;font-size:14px}
+.queue-item{
+  font-size:12px;
+  padding:6px;
+  color:var(--muted);
+}
+.queue-item.active{color:white}
+
+/* ================= PLAYER ================= */
+#player{
+  position:fixed;
+  bottom:0;left:0;right:0;
+  background:linear-gradient(135deg,#ff7ab6,#8b9cff);
+  padding:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 -20px 40px rgba(0,0,0,.45);
+}
+#player.hidden{display:none}
+
+#player img{
+  width:50px;height:50px;
+  border-radius:16px;
+}
+
+#info{flex:1}
+#title{
+  font-size:14px;
+  font-weight:700;
+  color:#0b0b10;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+#progress{
+  width:100%;
+  height:4px;
+  background:rgba(0,0,0,.25);
+  border-radius:10px;
+  margin-top:6px;
+  cursor:pointer;
+}
+#bar{height:100%;width:0%;background:#0b0b10}
+
+.ctrl{
+  background:#0b0b10;
+  color:white;
+  border:none;
+  border-radius:50%;
+  width:40px;height:40px;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.35);
+}
+</style>
+</head>
+
+<body>
+
+<h2>🎵 Malhar Music</h2>
+<p style="color:var(--muted)">Home • Search • Play</p>
+
+<input id="search" placeholder="Search songs, artists…">
+
+<div id="results"></div>
+
+<div id="queue">
+  <h4>Up Next</h4>
+  <div id="queueList"></div>
+</div>
+
+<div id="player" class="hidden">
+  <img id="cover">
+  <div id="info">
+    <div id="title">—</div>
+    <div id="progress"><div id="bar"></div></div>
+  </div>
+  <button class="ctrl" onclick="prev()">⏮</button>
+  <button class="ctrl" onclick="toggle()">⏯</button>
+  <button class="ctrl" onclick="next()">⏭</button>
+  <button class="ctrl" onclick="toggleQueue()">📃</button>
+</div>
+
+<audio id="audio"></audio>
+
+<script>
+const results=document.getElementById("results");
+const audio=document.getElementById("audio");
+const player=document.getElementById("player");
+const cover=document.getElementById("cover");
+const titleEl=document.getElementById("title");
+const bar=document.getElementById("bar");
+const progress=document.getElementById("progress");
+const queueBox=document.getElementById("queue");
+const queueList=document.getElementById("queueList");
+
+let queue=[],currentIndex=-1,isSeeking=false;
+
+const categories=[
+ {title:"❤️ Romance 90s",q:"90s bollywood romantic song"},
+ {title:"🎶 2000s Bollywood",q:"2000s bollywood hit song"},
+ {title:"🔥 New / Trending",q:"latest bollywood song"},
+ {title:"🎧 Indie / Acoustic",q:"indie acoustic song"},
+ {title:"🎼 Instrumental / LoFi",q:"instrumental lofi music"},
+ {title:"⭐ Recommended",q:"popular music audio"}
+];
+
+async function loadHome(){
+ results.innerHTML="";
+ for(const cat of categories){
+  const h=document.createElement("h3");
+  h.textContent=cat.title;
+  results.appendChild(h);
+  const res=await fetch(`https://archive.org/advancedsearch.php?q=${encodeURIComponent(cat.q)} AND mediatype:audio&fl[]=identifier&fl[]=title&rows=15&output=json`);
+  const data=await res.json();
+  data.response.docs.forEach(renderCard);
+ }
+}
+
+document.getElementById("search").addEventListener("keydown",async e=>{
+ if(e.key!=="Enter")return;
+ const q=e.target.value.trim();
+ if(!q){loadHome();return;}
+ results.innerHTML="Searching…";
+ const res=await fetch(`https://archive.org/advancedsearch.php?q=${encodeURIComponent(q)} AND mediatype:audio&fl[]=identifier&fl[]=title&rows=30&output=json`);
+ const data=await res.json();
+ results.innerHTML="";
+ data.response.docs.forEach(renderCard);
+});
+
+function renderCard(item){
+ const div=document.createElement("div");
+ div.className="card";
+ div.dataset.id=item.identifier;
+ div.innerHTML=`
+  <img src="https://archive.org/services/img/${item.identifier}" onerror="this.src='https://via.placeholder.com/300?text=Music'">
+  <h4>${item.title||"Untitled"}</h4>
+  <p>${item.identifier}</p>
+  <div class="menu">⋮</div>`;
+ div.onclick=()=>playNow(item);
+ div.querySelector(".menu").onclick=e=>{
+  e.stopPropagation();
+  showMenu(e.clientX,e.clientY,item);
+ };
+ results.appendChild(div);
+}
+
+function showMenu(x,y,item){
+ document.querySelectorAll(".menu-box").forEach(m=>m.remove());
+ const box=document.createElement("div");
+ box.className="menu-box";
+ box.innerHTML=`
+  <div data-a="now">▶ Play Now</div>
+  <div data-a="next">⏭ Play Next</div>
+  <div data-a="add">➕ Add to Queue</div>`;
+ document.body.appendChild(box);
+ box.style.left=x+"px";
+ box.style.top=y+"px";
+ box.onclick=e=>{
+  if(e.target.dataset.a==="now")playNow(item);
+  if(e.target.dataset.a==="next")playNext(item);
+  if(e.target.dataset.a==="add")addQueue(item);
+  box.remove();
+ };
+}
+
+async function playNow(item){
+ const i=queue.findIndex(q=>q.identifier===item.identifier);
+ if(i!==-1)currentIndex=i;
+ else{queue.splice(currentIndex+1,0,item);currentIndex++;}
+ await load(queue[currentIndex]);
+}
+
+function playNext(item){queue.splice(currentIndex+1,0,item);renderQueue();}
+function addQueue(item){queue.push(item);renderQueue();}
+
+async function load(item){
+ const res=await fetch(`https://archive.org/metadata/${item.identifier}`);
+ const data=await res.json();
+ const file=data.files.find(f=>f.name?.endsWith(".mp3"));
+ if(!file)return;
+ audio.src=`https://archive.org/download/${item.identifier}/${file.name}`;
+ audio.play();
+ cover.src=`https://archive.org/services/img/${item.identifier}`;
+ titleEl.textContent=item.title||"Untitled";
+ player.classList.remove("hidden");
+ document.querySelectorAll(".card").forEach(c=>c.classList.remove("playing"));
+ document.querySelector(`[data-id="${item.identifier}"]`)?.classList.add("playing");
+ renderQueue();
+}
+
+function renderQueue(){
+ queueList.innerHTML="";
+ queue.forEach((q,i)=>{
+  const d=document.createElement("div");
+  d.className="queue-item"+(i===currentIndex?" active":"");
+  d.textContent=q.title||"Untitled";
+  queueList.appendChild(d);
+ });
+}
+
+function toggleQueue(){
+ queueBox.style.display=queueBox.style.display==="block"?"none":"block";
+}
+
+audio.onended=()=>{if(currentIndex<queue.length-1){currentIndex++;load(queue[currentIndex]);}};
+function toggle(){audio.paused?audio.play():audio.pause()}
+function next(){if(currentIndex<queue.length-1){currentIndex++;load(queue[currentIndex]);}}
+function prev(){if(currentIndex>0){currentIndex--;load(queue[currentIndex]);}}
+
+progress.onpointerdown=e=>{isSeeking=true;seek(e)}
+window.onpointerup=()=>isSeeking=false
+progress.onpointermove=e=>{if(isSeeking)seek(e)}
+function seek(e){
+ const r=progress.getBoundingClientRect();
+ const p=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
+ audio.currentTime=p*audio.duration;
+}
+audio.ontimeupdate=()=>bar.style.width=(audio.currentTime/audio.duration*100||0)+"%";
+
+loadHome();
+</script>
+
+</body>
+</html>

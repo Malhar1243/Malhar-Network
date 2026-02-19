@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Friends SMP | Malhar</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+html{scroll-behavior:smooth}
+
+:root{
+  --mc-green:#3aa655;
+  --mc-border:#2e5d44;
+  --mc-text:#e6f4ea;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  color:var(--mc-text);
+  background:#0f1a14;
+}
+
+/* NAVBAR */
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:linear-gradient(180deg,#1b3a2b,#0f1a14);
+  border-bottom:3px solid var(--mc-border);
+  box-shadow:0 6px 0 #0a120d;
+}
+
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  justify-content:center;
+  gap:28px;
+}
+
+.nav-inner a{
+  font-family:"Archivo Black",sans-serif;
+  color:var(--mc-text);
+  text-decoration:none;
+  font-size:14px;
+  padding:8px 18px;
+  background:#1f3a2b;
+  border:2px solid #1f3a2b;
+}
+
+.nav-inner a:hover{
+  background:#2e5d44;
+  border-color:var(--mc-green);
+  color:#7CFF9B;
+}
+
+/* BACK */
+.back-btn{
+  position:fixed;
+  top:80px;
+  left:16px;
+  background:#fff;
+  color:#2f8f4e;
+  padding:8px 14px;
+  border-radius:6px;
+  font-size:14px;
+  font-weight:600;
+  text-decoration:none;
+  z-index:999;
+}
+
+/* HERO */
+.hero{
+  min-height:65vh;
+  background:linear-gradient(180deg,#1f4d34,#0f1a14);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:90px 20px;
+}
+
+.hero h1{
+  font-family:"Archivo Black",sans-serif;
+  font-size:52px;
+  margin-bottom:12px;
+}
+
+.hero p{opacity:.9;margin:6px 0}
+
+/* PLAY */
+.play-wrap{margin-top:30px;display:flex;justify-content:center}
+
+.play-btn{
+  background:linear-gradient(180deg,#3aa655,#2e7d4a);
+  color:#fff;
+  border:none;
+  padding:16px 38px;
+  font-size:18px;
+  font-weight:700;
+  border-radius:12px;
+  cursor:pointer;
+  box-shadow:0 14px 30px rgba(0,0,0,.45);
+
+  /* ✅ ONLY CHANGE */
+  animation:playBounce 2.2s ease-in-out infinite;
+  will-change:transform;
+}
+
+@keyframes playBounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+.play-info{
+  margin-top:14px;
+  font-size:13px;
+  opacity:.9;
+}
+
+/* SECTION */
+.section{
+  max-width:1200px;
+  margin:auto;
+  padding:70px 20px;
+}
+
+.section-title{
+  font-family:"Archivo Black",sans-serif;
+  font-size:28px;
+  margin-bottom:28px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.section-title img{
+  width:32px;
+  height:32px;
+  image-rendering:pixelated;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:24px;
+}
+
+/* CARD */
+.card{
+  background:linear-gradient(180deg,#1f3a2b,#182c21);
+  border:2px solid var(--mc-border);
+  border-radius:8px;
+  padding:22px;
+  box-shadow:0 18px 40px rgba(0,0,0,.35);
+}
+
+/* INFO */
+.info-row{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+  font-size:14px;
+  border-bottom:1px dashed rgba(255,255,255,.1);
+}
+.info-row:last-child{border:none}
+
+/* IP BOX */
+.ip-box{
+  background:#0f1a14;
+  border:2px dashed var(--mc-border);
+  border-radius:6px;
+  padding:14px;
+  font-family:monospace;
+  margin-top:10px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.copy-icon{
+  width:16px;
+  height:16px;
+  cursor:pointer;
+  fill:#b9e7c8;
+  opacity:.85;
+}
+.copy-icon:hover{opacity:1}
+
+.copied{
+  display:none;
+  color:#7CFF9B;
+  font-size:12px;
+  margin-top:6px;
+}
+
+/* RULES */
+.rule{
+  padding:8px 0;
+  border-bottom:1px dashed rgba(255,255,255,.1);
+  font-size:14px;
+}
+.rule:last-child{border:none}
+
+/* PLUGINS */
+.plugin{
+  display:inline-block;
+  background:#2e5d44;
+  padding:6px 12px;
+  border-radius:6px;
+  font-size:13px;
+  margin:4px;
+}
+
+/* FOOTER */
+.footer{
+  background:linear-gradient(180deg,#2a1414,#120000);
+  padding:50px 20px;
+  text-align:center;
+  font-size:13px;
+  opacity:.85;
+}
+
+@media(max-width:600px){
+  .hero h1{font-size:36px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+  <div class="nav-inner">
+    <a href="miencraft.html">Home</a>
+    <a href="laws.html">Laws & Punishment</a>
+    <a href="commands.html">Commands</a>
+  </div>
+</div>
+
+<a href="index.html" class="back-btn">← Back</a>
+
+<section class="hero" id="home">
+  <div>
+    <h1>MINECRAFT</h1>
+    <h1>Friends SMP</h1>
+    <p>Private Minecraft survival server • Java & Bedrock</p>
+
+    <div class="play-wrap">
+      <button class="play-btn"
+        onclick="window.location.href='minecraft://?addExternalServer=Friends%20SMP|play.malhar.site:25565'">
+        ▶ PLAY
+      </button>
+    </div>
+
+    <div class="play-info">
+      Java IP: <b>play.malhar.site</b><br>
+      Bedrock IP: <b>play.malhar.site</b> • Port: <b>25565</b>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">
+    <img src="https://img.icons8.com/?size=100&id=f1ZPU9Xpm8Dh&format=png&color=000000">
+    Server Information
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Server Details</h3>
+      <div class="info-row"><span>Mode</span><span>Survival</span></div>
+      <div class="info-row"><span>Software</span><span>Purpur</span></div>
+      <div class="info-row"><span>Version</span><span>1.20.11</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Join (Java)</h3>
+      <div class="ip-box">
+        <span>play.malhar.site</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Join (Bedrock)</h3>
+      <div class="ip-box">
+        <span>IP: play.malhar.site | Port: 25565</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="rules">
+  <div class="section-title">
+    <img src="https://img.icons8.com/?size=100&id=PQ7bo28SyNO6&format=png&color=000000">
+    Server Rules
+  </div>
+  <div class="card">
+    <div class="rule">• No griefing or stealing</div>
+    <div class="rule">• No hacks or unfair mods</div>
+    <div class="rule">• PvP only with consent</div>
+    <div class="rule">• Respect all players</div>
+    <div class="rule">• Rule breaking may lead to mute or ban</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-title">
+    <img src="https://img.icons8.com/color/48/minecraft-sword.png">
+    Installed Plugins
+  </div>
+  <div class="card">
+    <span class="plugin">EconomyShopGUI</span>
+    <span class="plugin">SmartSpawner</span>
+    <span class="plugin">EnhancedPets</span>
+    <span class="plugin">Essentials</span>
+    <span class="plugin">EssentialsChat</span>
+    <span class="plugin">Floodgate</span>
+    <span class="plugin">Geyser-Spigot</span>
+    <span class="plugin">GriefPrevention</span>
+    <span class="plugin">GSit</span>
+    <span class="plugin">LoginSecurity</span>
+    <span class="plugin">LuckPerms</span>
+    <span class="plugin">OnePlayerSleep</span>
+    <span class="plugin">SkinsRestorer</span>
+    <span class="plugin">TAB</span>
+    <span class="plugin">Vault</span>
+    <span class="plugin">ViaBackwards</span>
+    <span class="plugin">ViaVersion</span>
+    <span class="plugin">WorldEdit</span>
+  </div>
+</section>
+
+<div class="footer">
+  Minecraft © Mojang Studios • Server UI by Malhar
+</div>
+
+</body>
+</html>

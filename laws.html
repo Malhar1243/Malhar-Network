@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Friends SMP | Laws & Punishment</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --mc-green:#3aa655;
+  --mc-border:#2e5d44;
+  --mc-text:#e6f4ea;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:#0f1a14;
+  color:var(--mc-text);
+}
+
+/* NAVBAR */
+.navbar{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:linear-gradient(180deg,#1b3a2b,#0f1a14);
+  border-bottom:3px solid var(--mc-border);
+}
+
+.nav-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  justify-content:center;
+  gap:28px;
+}
+
+.nav-inner a{
+  font-family:"Archivo Black",sans-serif;
+  color:var(--mc-text);
+  text-decoration:none;
+  font-size:14px;
+  padding:8px 18px;
+  background:#1f3a2b;
+  border:2px solid #1f3a2b;
+}
+
+.nav-inner a:hover{
+  background:#2e5d44;
+  border-color:var(--mc-green);
+  color:#7CFF9B;
+}
+
+/* HERO */
+.hero{
+  padding:90px 20px 60px;
+  text-align:center;
+  background:linear-gradient(180deg,#1f4d34,#0f1a14);
+}
+
+.hero h1{
+  font-family:"Archivo Black",sans-serif;
+  font-size:46px;
+  margin-bottom:10px;
+}
+
+.hero p{
+  opacity:.9;
+  font-size:15px;
+}
+
+/* SECTION */
+.section{
+  max-width:900px;
+  margin:auto;
+  padding:60px 20px;
+}
+
+.section-title{
+  font-family:"Archivo Black",sans-serif;
+  font-size:26px;
+  margin-bottom:20px;
+}
+
+/* CARD */
+.card{
+  background:linear-gradient(180deg,#1f3a2b,#182c21);
+  border:2px solid var(--mc-border);
+  border-radius:8px;
+  padding:24px;
+  margin-bottom:30px;
+}
+
+/* LAW ITEM */
+.law{
+  padding:10px 0;
+  border-bottom:1px dashed rgba(255,255,255,.12);
+  font-size:14px;
+}
+.law:last-child{border:none}
+
+/* PUNISHMENT */
+.punish{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  padding:10px 0;
+  border-bottom:1px dashed rgba(255,255,255,.12);
+  font-size:14px;
+}
+.punish:last-child{border:none}
+
+.bad{
+  color:#ff6b6b;
+  font-weight:600;
+}
+
+.warn{
+  color:#ffd36b;
+  font-weight:600;
+}
+
+.severe{
+  color:#ff3b3b;
+  font-weight:700;
+}
+
+/* FOOTER */
+.footer{
+  background:linear-gradient(180deg,#2a1414,#120000);
+  padding:40px 20px;
+  text-align:center;
+  font-size:13px;
+  opacity:.85;
+}
+
+@media(max-width:600px){
+  .hero h1{font-size:34px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="nav-inner">
+    <a href="miencraft.html">Home</a>
+    <a href="laws.html">Laws & Punishment</a>
+    <a href="commands.html">Commands</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Laws & Punishment</h1>
+  <p>Follow the rules to keep Friends SMP fair, fun, and friendly.</p>
+</section>
+
+<!-- LAWS -->
+<section class="section">
+  <div class="section-title">Server Laws</div>
+  <div class="card">
+    <div class="law">1. No griefing, stealing, or destroying builds</div>
+    <div class="law">2. No hacking, cheating, or unfair mods</div>
+    <div class="law">3. No exploiting bugs or glitches</div>
+    <div class="law">4. Follow staff instructions at all times</div>
+  </div>
+</section>
+
+<!-- PUNISHMENTS -->
+<section class="section">
+  <div class="section-title">Punishments</div>
+  <div class="card">
+
+    <div class="punish">
+      <span>Minor rule break</span>
+      <span class="warn">Warning / Mute</span>
+    </div>
+
+    <div class="punish">
+      <span>Repeated minor offenses</span>
+      <span class="warn">Temporary Mute / Jail</span>
+    </div>
+
+    <div class="punish">
+      <span>Griefing / Stealing</span>
+      <span class="bad">Temporary Ban</span>
+    </div>
+
+    <div class="punish">
+      <span>Hacking / X-ray / Cheats</span>
+      <span class="severe">Permanent Ban</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- NOTE -->
+<section class="section">
+  <div class="section-title">Important Note</div>
+  <div class="card">
+    Punishments are based on severity and intent.  
+    Staff may change the punishment. Staff decisions are final.
+  </div>
+</section>
+
+<div class="footer">
+  Friends SMP • Laws & Punishment
+</div>
+
+</body>
+</html>

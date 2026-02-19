@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project Showcase | Malhar</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-gradient: linear-gradient(135deg, #119DA4, #FDE789);
+      --card-bg: #ffffff;
+      --border: rgba(0,0,0,0.08);
+      --text-dark: #0f172a;
+      --text-muted: #475569;
+      --accent: #119DA4;
+      --radius: 14px;
+    }
+
+    *{ box-sizing: border-box; }
+
+    body{
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      color: var(--text-dark);
+    }
+
+    /* 🔙 Back button – card style */
+    .back-btn{
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      background: var(--card-bg);
+      color: var(--accent);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      z-index: 1000;
+    }
+
+    .back-btn:hover{
+      background: rgba(255,255,255,0.9);
+    }
+
+    .container{
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 16px 60px;
+    }
+
+    .header{
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .header h1{
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 34px;
+      margin: 0;
+    }
+
+    .header p{
+      margin-top: 8px;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .projects-list{
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .project-card{
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      transition: transform .15s ease;
+    }
+
+    .project-card:hover{
+      transform: translateY(-2px);
+    }
+
+    .project-left{
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .project-title{
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .project-desc{
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .project-action{
+      text-decoration: none;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .note{
+      margin-top: 32px;
+      text-align: center;
+      font-size: 13px;
+      color: rgba(0,0,0,0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🔙 Back Button -->
+  <a href="index.html" class="back-btn">← Back</a>
+
+  <div class="container">
+
+    <div class="header">
+      <h1>Project Showcase</h1>
+      <p>Highlighted projects built under Malhar Hub</p>
+    </div>
+
+    <div class="projects-list">
+
+      <div class="project-card">
+        <div class="project-left">
+          <div class="project-title">OS Vault</div>
+          <div class="project-desc">
+            A centralized platform for operating system resources, tools, and utilities
+          </div>
+        </div>
+        <a href="https://osvault.malhar.site" class="project-action">View</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-left">
+          <div class="project-title">Malhar Movies</div>
+          <div class="project-desc">
+            Movie browsing website with categorized listings and a clean viewing interface
+          </div>
+        </div>
+        <a href="https://movies.malhar.site" class="project-action">View</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-left">
+          <div class="project-title">Emerald Hotel</div>
+          <div class="project-desc">
+            Hotel website showcasing rooms, services, and booking information
+          </div>
+        </div>
+        <a href="https://hotel.malhar.site" class="project-action">View</a>
+      </div>
+
+    </div>
+
+    <div class="note">
+      More projects will be added over time
+    </div>
+
+  </div>
+
+</body>
+</html>

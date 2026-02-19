@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --hub-teal:#119DA4;
+  --hub-yellow:#FDE789;
+  --hub-dark:#4B0C37;
+  --success:#16a34a;
+  --error:#dc2626;
+}
+
+*{box-sizing:border-box;font-family:Inter,sans-serif}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,var(--hub-teal),var(--hub-yellow));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.card{
+  width:360px;
+  background:#fff;
+  border-radius:18px;
+  padding:28px;
+  box-shadow:0 25px 45px rgba(0,0,0,.18);
+}
+
+.title{
+  font-family:"Archivo Black",sans-serif;
+  font-size:28px;
+  text-align:center;
+  color:var(--hub-dark);
+  margin-bottom:6px;
+}
+
+.subtitle{
+  text-align:center;
+  font-size:14px;
+  color:#555;
+  margin-bottom:22px;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  margin-bottom:12px;
+  font-size:14px;
+}
+
+input:focus{
+  outline:none;
+  border-color:var(--hub-teal);
+}
+
+button{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  font-weight:600;
+  font-size:15px;
+  cursor:pointer;
+  background:var(--hub-teal);
+  color:#fff;
+}
+
+button:hover{opacity:.9}
+
+.msg{
+  margin-top:12px;
+  text-align:center;
+  font-size:13px;
+  min-height:16px;
+}
+
+.msg.error{color:var(--error)}
+.msg.success{color:var(--success)}
+
+.link{
+  margin-top:14px;
+  text-align:center;
+  font-size:13px;
+}
+
+.link a{
+  color:var(--hub-teal);
+  text-decoration:none;
+  font-weight:500;
+}
+
+.link a:hover{
+  text-decoration:underline;
+}
+
+footer{
+  margin-top:18px;
+  text-align:center;
+  font-size:12px;
+  color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="title">Login</div>
+  <div class="subtitle">Access your Hub</div>
+
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+
+  <button onclick="login()">Login</button>
+
+  <div class="msg" id="msg"></div>
+
+  <!-- ✅ CREATE ACCOUNT LINK -->
+  <div class="link">
+    New here? <a href="register.html">Create account</a>
+  </div>
+
+  <footer>Only existing users can log in</footer>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword }
+    from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCuHCBVbfGq_csPgnIwU8m6vZcGF7KqaH8",
+    authDomain: "login-page-37ae8.firebaseapp.com",
+    projectId: "login-page-37ae8",
+    storageBucket: "login-page-37ae8.firebasestorage.app",
+    messagingSenderId: "225855593609",
+    appId: "1:225855593609:web:eb5067e096649ff5e1fa58"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const msg = document.getElementById("msg");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+
+  window.login = async () => {
+    msg.className = "msg";
+    msg.innerText = "";
+
+    try{
+      await signInWithEmailAndPassword(auth,email.value,password.value);
+
+      msg.classList.add("success");
+      msg.innerText = "Login successful";
+
+      setTimeout(()=>{
+        window.location.href = "index.html";
+      },700);
+
+    }catch(e){
+      msg.classList.add("error");
+      msg.innerText = "Invalid email or password";
+    }
+  };
+
+  email.addEventListener("input",()=>msg.innerText="");
+  password.addEventListener("input",()=>msg.innerText="");
+</script>
+
+</body>
+</html>
